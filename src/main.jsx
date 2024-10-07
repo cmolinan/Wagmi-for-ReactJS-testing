@@ -4,8 +4,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { WagmiProvider } from 'wagmi'
 
-import App from './App.tsx'
-import { config } from './wagmi.ts'
+import App from './App.jsx'
+import { config } from './wagmi.js'
 
 import './index.css'
 
@@ -13,7 +13,7 @@ globalThis.Buffer = Buffer
 
 const queryClient = new QueryClient()
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
