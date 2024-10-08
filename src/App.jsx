@@ -1,9 +1,23 @@
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import {  useAccount, useConnect, useDisconnect } from 'wagmi'
+import { Account } from './account.jsx';
+import { WalletOptions } from './walletOptions.jsx';
+
+function ConnectWallet() {
+  const { isConnected } = useAccount()
+  if (isConnected) return <Account />
+  return <WalletOptions />
+}
 
 function App() {
   const account = useAccount()
   const { connectors, connect, status, error } = useConnect()
   const { disconnect } = useDisconnect()
+
+  return (
+    <>
+     <ConnectWallet />
+    </>
+  )
 
   return (
     <>
