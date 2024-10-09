@@ -15,7 +15,6 @@ export function SendTransaction() {
   const { 
     isLoading,
     isSuccess,
-    status
   } = useWaitForTransactionReceipt({ 
     hash,
   });

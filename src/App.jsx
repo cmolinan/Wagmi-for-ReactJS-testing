@@ -2,6 +2,7 @@ import {  useAccount, useConnect, useDisconnect } from 'wagmi'
 import { Account } from './account.jsx';
 import { WalletOptions } from './walletOptions.jsx';
 import { SendTransaction } from './sendTransaction.jsx'
+import { ReadContract } from './readContract.jsx'
 
 function ConnectWallet() {
   const { isConnected } = useAccount()
@@ -18,6 +19,7 @@ function App() {
     <>
      <ConnectWallet />
      <SendTransaction />
+     <ReadContract />
     </>
   )
 
