@@ -2,7 +2,8 @@ import {
   useWaitForTransactionReceipt, 
   useWriteContract 
 } from 'wagmi'
- 
+import { ethers } from "ethers";
+
 import daoGovernorAbi from './blockchainABIs/dao.json'
 import nftTokenAbi from "./blockchainABIs/nft.json";
 
@@ -34,15 +35,41 @@ export function CreatePropose() {
     })
   } 
 
-  // const { isLoading: isConfirming, isSuccess: isConfirmed } = 
-  //   useWaitForTransactionReceipt({ 
-  //     hash, 
-  //   }) 
+  //Obtain the signature (a hash) of a event
+  const getEventSignature = (eventName) => {
+    const eventAbi = daoAbi.find(item => item?.name === eventName && item?.type === 'event');
+    const paramTypes = eventAbi?.inputs?.map(input => input?.type);
+    const eventWithTypes= eventName + "("+ paramTypes.join(',') +  ")"
+    return ethers.id(eventWithTypes);
+  }
 
-  const results =   useWaitForTransactionReceipt({      hash,    }) 
+  const results =   useWaitForTransactionReceipt({ hash }) 
   const isConfirming = results?.isLoading;
   const isConfirmed = results?.isSuccess;
 
+  if (isConfirmed) {
+    //Trying to get the event information
+    const event = results.data.logs.find(log => log.topics[0] === getEventSignature("ProposalCreated"));
+
+    if (event) {
+      const contract= new ethers.Interface(daoAbi);
+
+      const decodedEventFieldNames= contract.getEvent('ProposalCreated').inputs;
+      const decodedEventValues = contract.decodeEventLog('ProposalCreated', event.data, event.topics);
+      
+      const jsonObject = {};
+
+      //Fill field name and values
+      decodedEventFieldNames.forEach((field, index) => {
+        jsonObject[field.name] = decodedEventValues[field.name];
+      });
+
+      // Maybe store jsonObject
+      // setJsonObject----
+
+      
+    }
+  }
 
   return (
     <form onSubmit={submit}>
