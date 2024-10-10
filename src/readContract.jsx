@@ -40,11 +40,21 @@ export function ReadContract() {
       ...wagmiReadDaoContract, 
       functionName: 'token'      
     },
+    { 
+      ...wagmiReadDaoContract, 
+      functionName: 'state',
+      args: ["54997614473499074817063156870329883379386918590699273987342127012785782148446"],
+    },
+    { 
+      ...wagmiReadDaoContract, 
+      functionName: 'surveyProposalVotes',
+      args: ["42919918304810981870559238783263687350485432262033105574726600567194862464974"],
+    },
 
   ] 
     })
 
-  const [balance, totalSupply, ownerOf, token] = data || [] 
+  const [balance, totalSupply, ownerOf, token, state, votes] = data || [] 
 
   if (isPending) return <div>Loading...</div>
 
@@ -58,9 +68,16 @@ export function ReadContract() {
     return (
     <>
       <div>Balance: {balance?.result?.toString()}</div>
-      <div>Owner of Token 100: {ownerOf?.result}</div> 
+      { ownerOf.error ?
+        <div>Owner of Token 100 Error?: {ownerOf.error?.metaMessages[0] || ownerOf.error?.message || ownerOf?.error?.shortMessage}</div>
+       :  
+        <div>Owner of Token 100: {ownerOf?.result}</div>
+      }
       <div>Total Supply: {totalSupply?.result?.toString()}</div> 
       <div>Dao Contract Address: {token?.result}</div> 
+      <div>State Dao: {state?.result}</div> 
+      <div>Votes: {JSON.stringify(votes.result, (key, value) => 
+        value.toString() )}</div> 
     </>    
   )
 }
