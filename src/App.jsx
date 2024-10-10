@@ -4,6 +4,8 @@ import { WalletOptions } from './walletOptions.jsx';
 import { SendTransaction } from './sendTransaction.jsx'
 import { ReadContract } from './readContract.jsx'
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { MintNFT } from './mintNFT.jsx';
+import { CreatePropose } from './createPropose.jsx';
 function ConnectWallet() {
   const { isConnected } = useAccount()
   if (isConnected) return <Account />
@@ -33,6 +35,8 @@ function App() {
      {/* <ConnectWallet /> */}
      <SendTransaction />
      <ReadContract />
+     <MintNFT />
+     <CreatePropose />
      </>
   )
 
