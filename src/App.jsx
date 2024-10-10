@@ -3,7 +3,7 @@ import { Account } from './account.jsx';
 import { WalletOptions } from './walletOptions.jsx';
 import { SendTransaction } from './sendTransaction.jsx'
 import { ReadContract } from './readContract.jsx'
-
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 function ConnectWallet() {
   const { isConnected } = useAccount()
   if (isConnected) return <Account />
@@ -17,10 +17,23 @@ function App() {
 
   return (
     <>
-     <ConnectWallet />
+    <div 
+       style={{
+        display: 'flex',
+        justifyContent: 'flex-end',
+        padding: 12,
+      }}
+    >    
+     <ConnectButton 
+        showBalance={false}
+        chainStatus="name"
+      />
+     </div>
+
+     {/* <ConnectWallet /> */}
      <SendTransaction />
      <ReadContract />
-    </>
+     </>
   )
 
   return (

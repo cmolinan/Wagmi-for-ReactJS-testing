@@ -1,9 +1,12 @@
-import { http, createConfig } from 'wagmi'
+import { rainbowWallet, metaMaskWallet, coinbaseWallet } from '@rainbow-me/rainbowkit/wallets';
+import { getDefaultConfig, connectorsForWallets } from '@rainbow-me/rainbowkit';
+
 import { mainnet, sepolia } from 'wagmi/chains'
-import { injected, metaMask, coinbaseWallet } from 'wagmi/connectors'
+
+// import { http, createConfig } from 'wagmi'
+// import { injected, metaMask, coinbaseWallet } from 'wagmi/connectors'
 
 import { defineChain } from 'viem'
-
 export const iotaEvmTestnet = defineChain(
   {
     id: 1075,
@@ -31,16 +34,25 @@ export const iotaEvmTestnet = defineChain(
   }
 );
 
-export const config = createConfig({
-  chains: [mainnet, sepolia, iotaEvmTestnet],
-  connectors: [
-    injected(),
-    metaMask(), 
-    coinbaseWallet()    
+const connectors = connectorsForWallets(
+  [
+    {
+      groupName: 'Suggested',
+      wallets: [      
+        metaMaskWallet,
+        coinbaseWallet,        
+      ],
+    },
   ],
-  transports: {
-    [mainnet.id]: http(),
-    [sepolia.id]: http(),
-    [iotaEvmTestnet.id]: http(),
-  },
-})
+  {
+    appName: 'My RainbowKit App',
+    projectId: 'YOUR_PROJECT_ID',
+  }
+);
+
+export const config = getDefaultConfig({
+  connectors,
+  projectId: 'void',
+  chains: [mainnet, sepolia, iotaEvmTestnet],
+});
+
