@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useReadContract, useReadContracts } from 'wagmi'
 
 import daoGovernorAbi from './blockchainABIs/dao.json'
@@ -5,7 +6,7 @@ import nftTokenAbi from "./blockchainABIs/nft.json";
 
 export function ReadContract() {
   const nftContractAddress = "0x74D5CaF28b0d0AE0dEb592c7A9560949A6ddB4c9";
-  const daoContractAddress = "0x2262179561Ed1175E49B5738232CDdbfC1e8f493";
+  const daoContractAddress = "0x2EcE8deae5aF2b275632D8619499407d02955cE3";
 
   const daoAbi = daoGovernorAbi.abi;
   const nftAbi = nftTokenAbi.abi;
@@ -43,18 +44,23 @@ export function ReadContract() {
     { 
       ...wagmiReadDaoContract, 
       functionName: 'state',
-      args: ["54997614473499074817063156870329883379386918590699273987342127012785782148446"],
+      args: ["47449186224037701840669334900901816560572106203327853820817155183275332366978"],
     },
     { 
       ...wagmiReadDaoContract, 
       functionName: 'surveyProposalVotes',
-      args: ["42919918304810981870559238783263687350485432262033105574726600567194862464974"],
+      args: ["47449186224037701840669334900901816560572106203327853820817155183275332366978"],
+    },
+    { 
+      ...wagmiReadDaoContract, 
+      functionName: 'SurveyProposalsList',
+      args: [0, 10],
     },
 
   ] 
     })
 
-  const [balance, totalSupply, ownerOf, token, state, votes] = data || [] 
+  const [balance, totalSupply, ownerOf, token, state, votes, proposals] = data || [] 
 
   if (isPending) return <div>Loading...</div>
 
@@ -78,6 +84,11 @@ export function ReadContract() {
       <div>State Dao: {state?.result}</div> 
       <div>Votes: {JSON.stringify(votes.result, (key, value) => 
         value.toString() )}</div> 
+      {proposals && 
+        <div>        
+        {JSON.stringify(proposals.result.map(prop => prop.description))}
+        </div>
+      }
     </>    
   )
 }

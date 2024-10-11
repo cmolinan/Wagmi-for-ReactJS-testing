@@ -1,5 +1,5 @@
 {
-  "abi": [
+  "abi":[
     {
       "inputs": [
         {
@@ -709,6 +709,72 @@
           "internalType": "uint256",
           "name": "",
           "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint48",
+          "name": "startDate",
+          "type": "uint48"
+        },
+        {
+          "internalType": "uint32",
+          "name": "maxProposals",
+          "type": "uint32"
+        }
+      ],
+      "name": "SurveyProposalsList",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "proposalId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "proposer",
+              "type": "address"
+            },
+            {
+              "internalType": "uint48",
+              "name": "start",
+              "type": "uint48"
+            },
+            {
+              "internalType": "uint48",
+              "name": "end",
+              "type": "uint48"
+            },
+            {
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "internalType": "string[]",
+              "name": "options",
+              "type": "string[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "results",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint8",
+              "name": "state",
+              "type": "uint8"
+            }
+          ],
+          "internalType": "struct MagiaGovernorSurveys.ProposalListStruct[]",
+          "name": "",
+          "type": "tuple[]"
         }
       ],
       "stateMutability": "view",
@@ -1703,12 +1769,24 @@
           "type": "uint256"
         }
       ],
-      "name": "surveyProposalOptions",
+      "name": "surveyProposalInfo",
       "outputs": [
         {
-          "internalType": "string[]",
+          "components": [
+            {
+              "internalType": "string",
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "internalType": "string[]",
+              "name": "options",
+              "type": "string[]"
+            }
+          ],
+          "internalType": "struct MagiaGovernorSurveys.SurveyProposalInfoStruct",
           "name": "",
-          "type": "string[]"
+          "type": "tuple"
         }
       ],
       "stateMutability": "view",
@@ -1838,5 +1916,5 @@
       "stateMutability": "payable",
       "type": "receive"
     }
-  ]  
+  ]
 }

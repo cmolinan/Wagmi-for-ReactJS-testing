@@ -16,7 +16,7 @@ export function CreatePropose() {
   const [eventProposalData, setEventProposalData] = useState({});
   
   const nftContractAddress = "0x74D5CaF28b0d0AE0dEb592c7A9560949A6ddB4c9";
-  const daoContractAddress = "0x2262179561Ed1175E49B5738232CDdbfC1e8f493";
+  const daoContractAddress = "0x2EcE8deae5aF2b275632D8619499407d02955cE3";
 
   const daoAbi = daoGovernorAbi.abi;
   const nftAbi = nftTokenAbi.abi;
