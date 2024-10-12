@@ -1,1 +1,1 @@
-This is a [Vite](https://vitejs.dev) project bootstrapped with [`create-wagmi`](https://github.com/wevm/wagmi/tree/main/packages/create-wagmi).
+This is a test repository built with React JS to explore and experiment with Wagmi for the first time, yielding positive results.
