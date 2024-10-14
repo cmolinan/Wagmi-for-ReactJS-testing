@@ -3,9 +3,6 @@ import { getDefaultConfig, connectorsForWallets } from '@rainbow-me/rainbowkit';
 
 import { mainnet, sepolia } from 'wagmi/chains'
 
-// import { http, createConfig } from 'wagmi'
-// import { injected, metaMask, coinbaseWallet } from 'wagmi/connectors'
-
 import { defineChain } from 'viem'
 export const iotaEvmTestnet = defineChain(
   {
